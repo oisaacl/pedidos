@@ -5,8 +5,8 @@ class PedidoModel {
     constructor() {
        this.conexao = mysql.createConnection(config.db);
     }
-    create(nome) {
-    let sql = `insert into pedidos values ("${null}", "${nome}");`
+    create(id_pedido, descricao, valor, id_cliente) {
+    let sql = `insert into pedidos values ("${null}", "${descricao}", "${valor}", "${null}");`
        
         return new Promise ((resolve,reject)=>{
             this.conexao.query(sql,(erro,retorno)=>{
@@ -32,8 +32,8 @@ class PedidoModel {
     }
 
 
-    update(id_categoria, nome){
-        let sql = `UPDATE  pedidos SET nome=${nome} WHERE id_pedidos= ${id_categoria}`
+    update(id_pedido, descricao, valor, id_cliente){
+        let sql = `UPDATE  pedidos SET nome=${nome} WHERE id_pedidos= ${id_pedido}`
             
         return new Promise ((rsolve,reject)=>{
             this.conexao.query(sql,(erro,retorno)=>{
@@ -53,7 +53,7 @@ class PedidoModel {
     }
 
     delete(id_pedido){
-        let sql = `delete from pedidos where id_categoria="${id_pedido}";`
+        let sql = `delete from pedidos where id_pedido="${id_pedido}";`
 
         return new Promise((resolve,reject)=>{
             this.conexao.query(sql,(erro,retorno)=>{

@@ -7,8 +7,11 @@ class ClienteController {
     }
 
     create(req, res) {
-        const clientes = req.body.nome;
-        ClienteModel.create(clientes).then(
+        const id_cliente = req.body.id_cliente;
+        const nome_cliente = req.body.nome;
+        const endereco = req.body.nome;
+
+        ClientesModel.create(id_cliente,nome_cliente, endereco).then(
             resposta => {
                 console.debug("Cadastrando um cliente");
                 res.status(resposta[0]).json(resposta[1])
@@ -26,7 +29,7 @@ class ClienteController {
 
     read(req, res) {
        
-        ClienteModel.read().then(
+        ClientesModel.read().then(
             resposta => {
                 console.debug("Mostrando Cliente");
                 res.status(resposta[0]).json(resposta[1])
@@ -43,7 +46,7 @@ class ClienteController {
         const id_cliente = req.params.id_cliente;
         const nome = req.body.nome;
 
-        ClienteModel.update(id_cliente, nome_cliente, endereco).then(
+        ClientesModel.update(id_cliente, nome_cliente, endereco).then(
             resposta=>{
                 console.debug("Atualizando Cliente")
                 res.status(resposta[0]).json(resposta[1])
@@ -61,7 +64,7 @@ class ClienteController {
 
     delete(req, res) {
         const id_cliente = req.params.id_cliente;
-        ClienteModel.delete(id_cliente).then(
+        ClientesModel.delete(id_cliente).then(
             resposta =>{
                 console.debug("Cliente Deletado");
                 res.status(resposta[0]).json(resposta[1])

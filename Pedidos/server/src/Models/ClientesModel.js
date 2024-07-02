@@ -5,8 +5,9 @@ class ClienteModel {
     constructor() {
        this.conexao = mysql.createConnection(config.db);
     }
-    create(nome) {
-    let sql = `insert into clientes values ("${null}", "${nome}");`
+
+    create(id_cliente, nome_cliente, endereco) {
+    let sql = `insert into clientes values ("${id_cliente}", "${nome_cliente}", "${endereco}");`
        
         return new Promise ((resolve,reject)=>{
             this.conexao.query(sql,(erro,retorno)=>{
@@ -15,6 +16,7 @@ class ClienteModel {
                 }
                 resolve([201, "Cliente Adicionado"])
             })
+
         });
     }
 
@@ -52,7 +54,7 @@ class ClienteModel {
     
     }
 
-    delete(id_pedido){
+    delete(id_cliente, nome_cliente, enedereco){
         let sql = `delete from clientes where id_cliente="${id_cliente}";`
 
         return new Promise((resolve,reject)=>{

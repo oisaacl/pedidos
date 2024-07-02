@@ -1,5 +1,5 @@
 import { response } from "express";
-import PedidosModel from "../Models/PedidosModel";
+import PedidosModel from "../Models/PedidosModel.js";
 
 class PedidoController {
     constructor() {
@@ -8,7 +8,8 @@ class PedidoController {
 
     create(req, res) {
         const pedidos = req.body.nome;
-        PedidoModel.create(pedidos).then(
+        PedidosModel.create(pedidos).then(
+            
             resposta => {
                 console.debug("Cadastrando um pedido");
                 res.status(resposta[0]).json(resposta[1])
@@ -26,7 +27,7 @@ class PedidoController {
 
     read(req, res) {
        
-        PedidoModel.read().then(
+        PedidosModel.read().then(
             resposta => {
                 console.debug("Mostrando Pedido");
                 res.status(resposta[0]).json(resposta[1])
@@ -41,9 +42,12 @@ class PedidoController {
 
     update(req, res) {
         const id_pedido = req.params.id_pedido;
-        const nome = req.body.nome;
+        const descricao = req.body.descricao;
+        const valor = req.params.valor;
+        const id_cliente = req.body.id_cliente;
+        
 
-        PedidoModel.update(id_pedido, id_cliente).then(
+        PedidosModel.update(id_pedido, descricao, valor, id_cliente).then(
             resposta=>{
                 console.debug("Atualizando Pedido")
                 res.status(resposta[0]).json(resposta[1])
@@ -61,7 +65,7 @@ class PedidoController {
 
     delete(req, res) {
         const id_pedido = req.params.id_pedido;
-        PedidoModel.delete(id_pedido).then(
+        PedidosModel.delete(id_pedido).then(
             resposta =>{
                 console.debug("Pedido Deletado");
                 res.status(resposta[0]).json(resposta[1])
